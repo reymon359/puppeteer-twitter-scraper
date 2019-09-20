@@ -96,8 +96,12 @@ const twitter = {
         for (let tweetElement of tweetsArray) {
 
             let tweet = await tweetElement.$eval('div[class="js-tweet-text-container"]', element => element.innerText);
+            let postedDate = await tweetElement.$eval('a[class="tweet-timestamp js-permalink js-nav js-tooltip"]', element => element.getAttribute('title'));
+            let repliesCount = await tweetElement.$eval('span[class="ProfileTweet-actionCountForPresentation"]', element => element.innerText);
+            let retweetsCount = await tweetElement.$eval('div[class="ProfileTweet-action ProfileTweet-action--retweet js-toggleState js-toggleRt"] span[class="ProfileTweet-actionCountForPresentation"]', element => element.innerText);
+            let likesCount = await tweetElement.$eval('div[class="ProfileTweet-action ProfileTweet-action--favorite js-toggleState"] span[class="ProfileTweet-actionCountForPresentation"]', element => element.innerText);
 
-            tweets.push(tweet);
+            tweets.push({ tweet, postedDate, repliesCount, retweetsCount, likesCount });
         }
 
         debugger;
