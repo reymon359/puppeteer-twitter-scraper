@@ -8,14 +8,15 @@ const twitter = require('./twitter');
 
     await twitter.initialize();
 
-    await twitter.login(USERNAME, PASSWORD);
+    await twitter.getTweets('Udemy');
 
-    let details = await twitter.getUser('udemy');
+    // await twitter.login(USERNAME, PASSWORD);
+
+    // let details = await twitter.getUser('Udemy');
 
     // await twitter.postTweet('Hello world, this is just a test message.');
 
     debugger;
 
     // await browser.close();
-
 })();

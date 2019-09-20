@@ -79,6 +79,31 @@ const twitter = {
 
     },
 
+
+    getTweets: async(username, count = 10) => {
+
+        let url = await page.url();
+
+        if (url != USERNAME_URL(username)) {
+            await page.goto(USERNAME_URL(username));
+        }
+
+        await page.waitFor('#stream-items-id');
+
+        let tweetsArray = await page.$$('#stream-items-id > li');
+        let tweets = [];
+
+        for (let tweetElement of tweetsArray) {
+
+            let tweet = await tweetElement.$eval('div[class="js-tweet-text-container"]', element => element.innerText);
+
+            tweets.push(tweet);
+        }
+
+        debugger;
+
+    },
+
     end: async() => {
         await browser.close();
     }
