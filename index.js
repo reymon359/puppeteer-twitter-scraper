@@ -10,7 +10,9 @@ const twitter = require('./twitter');
 
     await twitter.login(USERNAME, PASSWORD);
 
-    await twitter.postTweet('Hello world, this is just a test message.');
+    let details = await twitter.getUser('udemy');
+
+    // await twitter.postTweet('Hello world, this is just a test message.');
 
     debugger;
 
