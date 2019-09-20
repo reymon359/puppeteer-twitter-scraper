@@ -3,8 +3,8 @@ const puppeteer = require('puppeteer');
 (async() => {
     const BASE_URL = 'https://twitter.com/';
     const LOGIN_URL = 'https://twitter.com/login';
-    const USERNAME = 'altumcode';
-    const PASSWORD = 'thisisjustatest';
+    const USERNAME = 'hellocaramello1';
+    const PASSWORD = '123hellocaramello';
 
     const browser = await puppeteer.launch({
         headless: false
