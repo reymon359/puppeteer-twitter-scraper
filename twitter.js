@@ -28,7 +28,23 @@ const twitter = {
         await page.type('form[class="t1-form clearfix signin js-signin"] input[name="session[username_or_email]"]', username, { delay: 25 });
         await page.type('form[class="t1-form clearfix signin js-signin"] input[name="session[password]"]', password, { delay: 25 });
         await page.click('button[type="submit"][class="submit EdgeButton EdgeButton--primary EdgeButtom--medium"]');
+        await page.waitFor('#tweet-box-home-timeline');
+        await page.waitFor(1000);
+    },
 
+    postTweet: async(message) => {
+        let url = await page.url();
+
+        // checking the URL
+        if (url != BASE_URL) {
+            await page.goto(BASE_URL);
+        }
+
+        await page.waitFor('#tweet-box-home-timeline');
+        await page.click('#tweet-box-home-timeline');
+        await page.waitFor(500);
+        await page.keyboard.type(message, { delay: 50 }); // Another way to type
+        await page.click('button[class="tweet-action EdgeButton EdgeButton--primary js-tweet-btn"]');
     },
 
     end: async() => {
