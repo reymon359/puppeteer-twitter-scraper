@@ -80,6 +80,7 @@ const twitter = {
     },
 
 
+
     getTweets: async(username, count = 10) => {
 
         let url = await page.url();
@@ -91,7 +92,20 @@ const twitter = {
         await page.waitFor('#stream-items-id');
 
         let tweetsArray = await page.$$('#stream-items-id > li');
+        let lastTweetsArrayLength = 0;
         let tweets = [];
+
+        // loading more tweets
+        while (tweetsArray.length < count) {
+            await page.evaluate(`window.scrollTo(0, document.body.scrollHeight)`);
+            await page.waitFor(3000);
+
+            tweetsArray = await page.$$('#stream-items-id > li');
+
+            if (lastTweetsArrayLength == tweetsArray.length) break;
+
+            lastTweetsArrayLength = tweetsArray.length;
+        }
 
         for (let tweetElement of tweetsArray) {
 
@@ -104,8 +118,9 @@ const twitter = {
             tweets.push({ tweet, postedDate, repliesCount, retweetsCount, likesCount });
         }
 
-        debugger;
+        tweets = tweets.slice(0, count);
 
+        return tweets;
     },
 
     end: async() => {

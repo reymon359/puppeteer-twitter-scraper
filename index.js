@@ -8,7 +8,7 @@ const twitter = require('./twitter');
 
     await twitter.initialize();
 
-    await twitter.getTweets('Udemy');
+    await twitter.getTweets('Udemy', 50);
 
     // await twitter.login(USERNAME, PASSWORD);
 
